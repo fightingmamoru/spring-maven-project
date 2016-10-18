@@ -17,6 +17,7 @@
 		<org.apache.logging.log4j>2.7</org.apache.logging.log4j>
 		<org.apache.commons>2.1.1</org.apache.commons>
 		<mysql>5.1.40</mysql>
+		<javax.servlet>3.0.1</javax.servlet>
 	</properties>
 
 	<dependencies>
@@ -26,6 +27,14 @@
 			<artifactId>junit</artifactId>
 			<version>${junit}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Spring -->
@@ -54,6 +63,14 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework}</version>
+		</dependency>
+
+		<!-- spring-test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- log4j & slf4j dependency (for Logging) -->

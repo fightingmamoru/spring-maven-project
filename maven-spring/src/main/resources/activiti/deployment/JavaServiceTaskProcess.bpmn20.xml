@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
+			 xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+			 xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+			 xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath"
+			 id="m1477033110286" name="" targetNamespace="http://www.activiti.org/test"
+			 typeLanguage="http://www.w3.org/2001/XMLSchema">
+
+	<process id="jstprocess" isClosed="false" isExecutable="true" name="JST Process" processType="None">
+		<startEvent id="jststartevent" name="Java Service Task StartEvent"/>
+		<sequenceFlow id="jstflow1" name="JST Flow 1" sourceRef="jststartevent" targetRef="printvariable"/>
+		<serviceTask activiti:exclusive="true" id="printvariable" name="Print Variable"
+					 activiti:class="org.mamoru.activiti.test.servicetask.PrintVariable"/>
+		<sequenceFlow id="jstflow2" name="JST Flow 2" sourceRef="printvariable" targetRef="sumvariable"/>
+		<serviceTask activiti:exclusive="true" id="sumvariable" name="Sum Variable"
+					 activiti:class="org.mamoru.activiti.test.servicetask.SumVariable"/>
+		<sequenceFlow id="jstflow3" name="JST Flow 3" sourceRef="sumvariable" targetRef="jstendevent"/>
+		<endEvent id="jstendevent" name="Java Service Task EndEvent"/>
+	</process>
+
+	<bpmndi:BPMNDiagram
+			documentation="background=#FFFFFF;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0"
+			id="Diagram-_1" name="New Diagram">
+		<bpmndi:BPMNPlane bpmnElement="jstprocess">
+			<bpmndi:BPMNShape bpmnElement="jststartevent" id="Shape-jststartevent">
+				<omgdc:Bounds height="32.0" width="32.0" x="60.0" y="80.0"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="jstendevent" id="Shape-jstendevent">
+				<omgdc:Bounds height="32.0" width="32.0" x="540.0" y="80.0"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="printvariable" id="Shape-printvariable">
+				<omgdc:Bounds height="55.0" width="105.0" x="180.0" y="70.0"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="55.0" width="105.0" x="0.0" y="0.0"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="sumvariable" id="Shape-sumvariable">
+				<omgdc:Bounds height="55.0" width="105.0" x="360.0" y="70.0"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="55.0" width="105.0" x="0.0" y="0.0"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="jstflow3" id="BPMNEdge_jstflow3" sourceElement="sumvariable"
+							 targetElement="jstendevent">
+				<omgdi:waypoint x="465.0" y="97.5"/>
+				<omgdi:waypoint x="540.0" y="96.0"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="465.0" y="97.0"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="jstflow2" id="BPMNEdge_jstflow2" sourceElement="printvariable"
+							 targetElement="sumvariable">
+				<omgdi:waypoint x="285.0" y="97.5"/>
+				<omgdi:waypoint x="360.0" y="97.5"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="285.0" y="97.0"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="jstflow1" id="BPMNEdge_jstflow1" sourceElement="jststartevent"
+							 targetElement="printvariable">
+				<omgdi:waypoint x="92.0" y="96.0"/>
+				<omgdi:waypoint x="180.0" y="97.5"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="95.0" y="97.0"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</definitions>

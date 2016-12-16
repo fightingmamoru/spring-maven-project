@@ -12,7 +12,7 @@
 	<properties>
 		<java>1.7</java>
 		<junit>4.12</junit>
-		<org.springframework>4.2.5.RELEASE</org.springframework>
+		<org.springframework>4.2.8.RELEASE</org.springframework>
 		<org.slf4j>1.7.21</org.slf4j>
 		<org.apache.logging.log4j>2.7</org.apache.logging.log4j>
 		<org.apache.commons>2.1.1</org.apache.commons>

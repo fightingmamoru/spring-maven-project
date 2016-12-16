@@ -21,8 +21,8 @@
 	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
 	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
 
-	<bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">
-		<property name="configurationResource" value="classpath*:spring/servlet/servlet-activiti-context.xml" />
-		<property name="processEngine" ref="processEngine" />
-	</bean>
+	<!--<bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">-->
+		<!--<property name="configurationResource" value="classpath*:spring/servlet/servlet-activiti-context.xml" />-->
+		<!--<property name="processEngine" ref="processEngine" />-->
+	<!--</bean>-->
 </beans>

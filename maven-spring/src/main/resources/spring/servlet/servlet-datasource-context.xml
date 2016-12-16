@@ -6,7 +6,7 @@
 	<!-- BasicDatasource -->
 	<bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://124.50.85.159:3307/fightingmamoru" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/fightingmamoru" />
 		<property name="username" value="fightingmamoru" />
 		<property name="password" value="mncd0218!" />
 		<property name="initialSize" value="3" />

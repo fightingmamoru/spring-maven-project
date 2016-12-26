@@ -25,6 +25,6 @@
 	</bean>
 
 	<!-- Component scan under base-package and add @Bean -->
-	<context:component-scan base-package="org.mamoru.*" />
+	<context:component-scan base-package="org.mamoru.webapp.*"/>
 
 </beans>

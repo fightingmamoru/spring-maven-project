@@ -1,9 +1,7 @@
 package org.mamoru.webapp.test.vo;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.AssertTrue;
 import java.io.Serializable;
 
 public class TestUserVO implements Serializable
@@ -13,40 +11,10 @@ public class TestUserVO implements Serializable
 	@NotEmpty
 	private String userType;
 
-	// userType = 'A' 일 경우 검증할 필드
-	@AssertTrue
-	private boolean isUserIdOK()
-	{
-		return !(this.userType.equals("USER")) || StringUtils.isNotEmpty(this.userId);
-	}
-
 	private String userId;
-	private boolean userIdOK;
-
-//	@AssertTrue
-//	public boolean isUserName()
-//	{
-//		return this.userType==null || !(this.userType.equals("USER")) || StringUtils.isNotEmpty(this.userType);
-//	}
-
 	private String userName;
 
-	// userType = 'B' 일 경우 검증할 필드
-//	@AssertTrue
-//	public boolean isCompanyId()
-//	{
-//		return this.userType==null || !(this.userType.equals("COMPANY")) || StringUtils.isNotEmpty(this.userType);
-//	}
-
 	private String companyId;
-
-
-//	@AssertTrue
-//	public boolean isCompanyName()
-//	{
-//		return this.userType==null || !(this.userType.equals("COMPANY")) || StringUtils.isNotEmpty(this.userType);
-//	}
-
 	private String companyName;
 
 	public String getUserType()

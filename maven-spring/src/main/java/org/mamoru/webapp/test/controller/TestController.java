@@ -1,5 +1,6 @@
 package org.mamoru.webapp.test.controller;
 
+import org.mamoru.common.util.JavaScriptUtil;
 import org.mamoru.webapp.test.vo.TestUserVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -55,5 +56,35 @@ public class TestController
 		}
 
 		return mav;
+	}
+
+	@RequestMapping(value = "/rhino")
+	public ModelAndView rhino()
+	{
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName(JSP_PATH  + "rhino");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/setItem")
+	public void setItem() throws Exception
+	{
+		String script = "function setValue() { localStorage.setItem('itemKey', 'testValue'); }";
+
+		Object returnValue = JavaScriptUtil.callJavaScript(script, "setValue");
+
+		System.out.println("[setItem()] " + returnValue);
+	}
+
+	@RequestMapping(value = "/getItem")
+	public void getItem() throws Exception
+	{
+		String script = "function getValue() { return localStorage.getItem('itemKey'); }";
+
+		Object returnValue = JavaScriptUtil.callJavaScript(script, "getValue");
+
+		System.out.println("[getItem()] " + returnValue);
 	}
 }

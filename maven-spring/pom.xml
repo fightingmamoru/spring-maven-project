@@ -54,6 +54,13 @@
 			</exclusions>
 		</dependency>
 
+		<!-- spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework}</version>
+		</dependency>
+
 		<!-- spring-web -->
 		<dependency>
 			<groupId>org.springframework</groupId>

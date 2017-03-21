@@ -20,7 +20,7 @@
 		<javax.servlet>3.0.1</javax.servlet>
 		<org.mybatis>3.4.1</org.mybatis>
 		<org.mybatis-spring>1.3.0</org.mybatis-spring>
-		<org.activiti>5.21.0</org.activiti>
+		<org.activiti>5.22.0</org.activiti>
 	</properties>
 
 	<dependencies>

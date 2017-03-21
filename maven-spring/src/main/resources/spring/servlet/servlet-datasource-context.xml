@@ -6,14 +6,27 @@
 	<!-- BasicDatasource -->
 	<bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/fightingmamoru" />
-		<property name="username" value="fightingmamoru" />
-		<property name="password" value="mncd0218!" />
+		<property name="url" value="jdbc:mysql://localhost:3306/spring" />
+		<property name="username" value="spring" />
+		<property name="password" value="spring" />
+		<property name="initialSize" value="3" />
+	</bean>
+
+	<!-- activitiDataSource -->
+	<bean id="activitiDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/activiti01" />
+		<property name="username" value="activiti01" />
+		<property name="password" value="activiti01" />
 		<property name="initialSize" value="3" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="basicDataSource" />
+	</bean>
+
+	<bean id="activitiTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="activitiDataSource" />
 	</bean>
 
 </beans>

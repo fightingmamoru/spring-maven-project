@@ -4,11 +4,18 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
-		<property name="dataSource" ref="basicDataSource" />
-		<property name="transactionManager" ref="transactionManager" />
+		<property name="dataSource" ref="activitiDataSource" />
+		<property name="transactionManager" ref="activitiTransactionManager" />
 		<property name="databaseSchemaUpdate" value="true" />
 		<property name="jobExecutorActivate" value="false" />
 		<property name="deploymentResources" value="classpath*:activiti/deployment/*.bpmn20.xml" />
+
+		<!-- todo : Add eventlistener -->
+		<property name="eventListeners">
+			<list>
+				<bean class="org.mamoru.common.activiti.listener.ActivitiCommonEventListener"/>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
@@ -21,8 +28,8 @@
 	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
 	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
 
-	<!--<bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">-->
-		<!--<property name="configurationResource" value="classpath*:spring/servlet/servlet-activiti-context.xml" />-->
-		<!--<property name="processEngine" ref="processEngine" />-->
-	<!--</bean>-->
+	<bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">
+		<property name="configurationResource" value="classpath*:spring/servlet/servlet-activiti-context.xml" />
+		<property name="processEngine" ref="processEngine" />
+	</bean>
 </beans>

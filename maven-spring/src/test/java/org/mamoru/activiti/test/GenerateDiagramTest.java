@@ -33,7 +33,7 @@ public class GenerateDiagramTest
 
 	@Autowired
 	@Rule
-	public ActivitiRule activitiSpringRule;
+	private ActivitiRule activitiSpringRule;
 
 	@Test
 	public void test() throws IOException

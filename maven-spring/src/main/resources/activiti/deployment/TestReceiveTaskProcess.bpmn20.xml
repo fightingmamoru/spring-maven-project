@@ -18,24 +18,24 @@
 		</sequenceFlow>
 	</process>
 	<bpmndi:BPMNDiagram id="BPMNDiagram_testJavaProcess">
-		<bpmndi:BPMNPlane bpmnElement="testReceiveProcess" id="BPMNPlane_testJavaProcess">
+		<bpmndi:BPMNPlane bpmnElement="testReceiveProcess" id="BPMNPlane_testReceiveProcess">
 			<bpmndi:BPMNShape bpmnElement="startevent" id="BPMNShape_startevent">
-				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+				<omgdc:Bounds height="35.0" width="35.0" x="30.0" y="160.0"></omgdc:Bounds>
 			</bpmndi:BPMNShape>
 			<bpmndi:BPMNShape bpmnElement="receivetask" id="BPMNShape_receivetask">
-				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+				<omgdc:Bounds height="55.0" width="105.0" x="320.0" y="150.0"></omgdc:Bounds>
 			</bpmndi:BPMNShape>
 			<bpmndi:BPMNShape bpmnElement="exclusivegateway" id="BPMNShape_exclusivegateway">
-				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+				<omgdc:Bounds height="40.0" width="40.0" x="520.0" y="157.0"></omgdc:Bounds>
 			</bpmndi:BPMNShape>
 			<bpmndi:BPMNShape bpmnElement="servicetaskA" id="BPMNShape_servicetaskA">
-				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+				<omgdc:Bounds height="55.0" width="105.0" x="730.0" y="50.0"></omgdc:Bounds>
 			</bpmndi:BPMNShape>
 			<bpmndi:BPMNShape bpmnElement="servicetaskB" id="BPMNShape_servicetaskB">
-				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+				<omgdc:Bounds height="55.0" width="105.0" x="730.0" y="240.0"></omgdc:Bounds>
 			</bpmndi:BPMNShape>
 			<bpmndi:BPMNShape bpmnElement="servicetask" id="BPMNShape_servicetask">
-				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+				<omgdc:Bounds height="55.0" width="105.0" x="140.0" y="150.0"></omgdc:Bounds>
 			</bpmndi:BPMNShape>
 			<bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
 				<omgdi:waypoint x="425.0" y="177.0"></omgdi:waypoint>

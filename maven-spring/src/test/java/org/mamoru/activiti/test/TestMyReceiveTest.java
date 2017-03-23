@@ -1,6 +1,7 @@
 package org.mamoru.activiti.test;
 
 import org.activiti.engine.*;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.Test;
@@ -15,10 +16,9 @@ import java.util.Map;
  * - processInstance 및 processInstanceConfig 소스코드로 지정
  * - 진행과정에서 생성 된 데이터는 모두 DB에 저장됨
  */
-public class TestMyProcessSingleTest
+public class TestMyReceiveTest
 {
 	@Test
-	// @Deployment(resources = {"activiti/deployment/TestMyProcess.bpmn20.xml"})
 	public void testActivitiProcess()
 	{
 		// 01. Create Activiti Process Engine (Use mysql)
@@ -30,54 +30,60 @@ public class TestMyProcessSingleTest
 		TaskService taskService = processEngine.getTaskService();
 
 		// 03. Deploy Process Definition (Only one execute)
-		// createDeployment(repositoryService);
-
+		createDeployment(repositoryService);
 
 		// 04. Start Process Instance
-		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("testMyProcess");
+		Map<String, Object> serviceTaskVariable = new HashMap<String, Object>();
+		serviceTaskVariable.put("type","A");
 
-		// 05. Inquiry Task List
-		List<Task> tasklist = taskService.createTaskQuery().list();
+		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("testReceiveProcess", serviceTaskVariable);
+
+		// 05. Inquiry Execution Id
+		Execution execution = runtimeService.createExecutionQuery().processInstanceId(processInstance.getId())
+																   .activityId("servicetask1")
+																   .singleResult();
+
+		// 06. Inquiry Task List
+		List<Task> tasklist = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
 
 		for ( Task task : tasklist )
 		{
 			System.out.println("[TaskList Data] taskId: " + task.getId() + " / taskName: " + task.getName());
 		}
 
-		// 06. Complete First User Task
-		Map<String, Object> firstTaskVariable = new HashMap<String, Object>();
+		// 07. Signal to Receive Task
+		runtimeService.signal(execution.getId());
 
-		firstTaskVariable.put("name","firstUser");
-		firstTaskVariable.put("description","First User Task Completing by firstUser!");
-
-		taskService.complete(tasklist.get(0).getId(), firstTaskVariable);
-
-		// 07. Inquiry Task List
+		// 08. Inquiry Task List
 		tasklist = taskService.createTaskQuery().list();
 
 		for ( Task task : tasklist )
 		{
 			System.out.println("[TaskList Data] taskId: " + task.getId() + " / taskName: " + task.getName());
 		}
+	}
 
-		// 08. Complete Second User Task
-		/*
-		Map<String, Object> secondTaskVariable = new HashMap<String, Object>();
+	@Test
+	public void testToSignal()
+	{
+		// 01. Create Activiti Process Engine (Use mysql)
+		ProcessEngine processEngine = getProcessEngine();
 
-		secondTaskVariable.put("name","secondUser");
-		secondTaskVariable.put("description","Second User Task Completing by firstUser!");
+		// 02. Set Acitiviti Services
+		RepositoryService repositoryService = processEngine.getRepositoryService();
+		RuntimeService runtimeService = processEngine.getRuntimeService();
+		TaskService taskService = processEngine.getTaskService();
 
-		taskService.complete(tasklist.get(0).getId(), secondTaskVariable);
+		// 03. Set Process Instance Id
+		String processInstanceId = "130005";
 
+		// 04. Inquiry Execution Id
+		Execution execution = runtimeService.createExecutionQuery().processInstanceId(processInstanceId)
+				.activityId("receivetask")
+				.singleResult();
 
-		// 09. Inquiry Task
-		tasklist = taskService.createTaskQuery().list();
-
-		for ( Task task : tasklist )
-		{
-			System.out.println("[TaskList Data] taskId: " + task.getId() + " / taskName: " + task.getName());
-		}
-		*/
+		// 06. Signal to Receive Task
+		runtimeService.signal(execution.getId());
 	}
 
 	private ProcessEngine getProcessEngine()
@@ -94,8 +100,8 @@ public class TestMyProcessSingleTest
 	private void createDeployment(RepositoryService repositoryService)
 	{
 		repositoryService.createDeployment()
-				.name("testMyProcess")
-				.addClasspathResource("activiti/deployment/TestMyProcess.bpmn20.xml")
+				.name("testReceiveProcess")
+				.addClasspathResource("activiti/deployment/TestReceiveTaskProcess.bpmn20.xml")
 				.deploy();
 	}
 }

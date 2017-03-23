@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
 			 expressionLanguage="http://www.w3.org/1999/XPath"
-			 id="m1477033110286" name="" targetNamespace="http://www.activiti.org/test"
+			 targetNamespace="http://www.activiti.org/test"
 			 typeLanguage="http://www.w3.org/2001/XMLSchema">
 
-	<process id="testMyProcess" name="testMyProcess">
+	<process id="testMyProcess" name="Test My Process">
 		<startEvent id="startEvent" name="TestMyProcess Start Event"/>
 		<sequenceFlow sourceRef="startEvent" targetRef="firstUserTask"/>
 		<userTask id="firstUserTask" name="First User Task"/>

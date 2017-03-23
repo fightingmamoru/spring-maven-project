@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.ubintis.com">
+	<process id="testReceiveProcess" name="Test Receive Process" isExecutable="true">
+		<startEvent id="startevent" name="StartEvent"></startEvent>
+		<receiveTask id="receivetask" name="Receive Task"></receiveTask>
+		<exclusiveGateway id="exclusivegateway" name="Exclusive Gateway"></exclusiveGateway>
+		<serviceTask id="servicetaskA" name="Service Task Type A" activiti:class="org.mamoru.activiti.test.servicetask.WorkingTypeA"></serviceTask>
+		<serviceTask id="servicetaskB" name="Service Task Type B" activiti:class="org.mamoru.activiti.test.servicetask.WorkingTypeB"></serviceTask>
+		<serviceTask id="servicetask" name="Service Task" activiti:class="org.mamoru.activiti.test.servicetask.CheckTypeServiceTask"></serviceTask>
+		<sequenceFlow id="flow0" name="Flow0" sourceRef="startevent" targetRef="servicetask"></sequenceFlow>
+		<sequenceFlow id="flow1" name="Flow1" sourceRef="servicetask" targetRef="receivetask"></sequenceFlow>
+		<sequenceFlow id="flow2" name="Flow2" sourceRef="receivetask" targetRef="exclusivegateway"></sequenceFlow>
+		<sequenceFlow id="flow3-A" name="Flow3 Type A" sourceRef="exclusivegateway" targetRef="servicetaskA">
+			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${type == 'A'}]]></conditionExpression>
+		</sequenceFlow>
+		<sequenceFlow id="flow3-B" name="Flow3 Type A" sourceRef="exclusivegateway" targetRef="servicetaskB">
+			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${type == 'B'}]]></conditionExpression>
+		</sequenceFlow>
+	</process>
+	<bpmndi:BPMNDiagram id="BPMNDiagram_testJavaProcess">
+		<bpmndi:BPMNPlane bpmnElement="testReceiveProcess" id="BPMNPlane_testJavaProcess">
+			<bpmndi:BPMNShape bpmnElement="startevent" id="BPMNShape_startevent">
+				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="receivetask" id="BPMNShape_receivetask">
+				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="exclusivegateway" id="BPMNShape_exclusivegateway">
+				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="servicetaskA" id="BPMNShape_servicetaskA">
+				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="servicetaskB" id="BPMNShape_servicetaskB">
+				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="servicetask" id="BPMNShape_servicetask">
+				<omgdc:Bounds height="30.0" width="30.0" x="-15.0" y="-15.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+				<omgdi:waypoint x="425.0" y="177.0"></omgdi:waypoint>
+				<omgdi:waypoint x="520.0" y="177.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="460.0" y="177.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow3-A" id="BPMNEdge_flow3-A">
+				<omgdi:waypoint x="540.0" y="157.0"></omgdi:waypoint>
+				<omgdi:waypoint x="540.0" y="77.0"></omgdi:waypoint>
+				<omgdi:waypoint x="730.0" y="77.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="560.0" y="92.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow3-B" id="BPMNEdge_flow3-B">
+				<omgdi:waypoint x="540.0" y="197.0"></omgdi:waypoint>
+				<omgdi:waypoint x="540.0" y="267.0"></omgdi:waypoint>
+				<omgdi:waypoint x="730.0" y="267.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="560.0" y="239.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow0" id="BPMNEdge_flow0">
+				<omgdi:waypoint x="65.0" y="177.0"></omgdi:waypoint>
+				<omgdi:waypoint x="140.0" y="177.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="79.0" y="177.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+				<omgdi:waypoint x="245.0" y="177.0"></omgdi:waypoint>
+				<omgdi:waypoint x="320.0" y="177.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="269.0" y="177.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</definitions>

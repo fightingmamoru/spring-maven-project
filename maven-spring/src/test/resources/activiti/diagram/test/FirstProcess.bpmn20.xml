@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+	<process id="firstProcess" name="First Process" isExecutable="true">
+		<startEvent id="startFirstProcess" name="startFirstProcess"></startEvent>
+		<endEvent id="endFirstProcess" name="endFirstProcess"></endEvent>
+		<serviceTask id="selectGenderTask" name="Select Gender Task" activiti:class="org.mamoru.activiti.ntest.service.first.SelectGender"></serviceTask>
+		<serviceTask id="PrintMilitaryNumTask" name="Print Military Serial Number" activiti:class="org.mamoru.activiti.ntest.service.first.PrintMilitarySerialNumber"></serviceTask>
+		<exclusiveGateway id="checkGenderGateway" name="Check Gender Gateway"></exclusiveGateway>
+		<serviceTask id="PrintHiTask" name="Print HighSchool Task" activiti:class="org.mamoru.activiti.ntest.service.first.PrintHighSchool"></serviceTask>
+		<sequenceFlow id="flow1" sourceRef="startFirstProcess" targetRef="selectGenderTask"></sequenceFlow>
+		<sequenceFlow id="flow2" sourceRef="selectGenderTask" targetRef="checkGenderGateway"></sequenceFlow>
+		<sequenceFlow id="flowGenderMale" name="Male" sourceRef="checkGenderGateway" targetRef="PrintMilitaryNumTask">
+			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${gender == 'M'}]]></conditionExpression>
+		</sequenceFlow>
+		<sequenceFlow id="flowGenderFemale" name="Female" sourceRef="checkGenderGateway" targetRef="PrintHiTask">
+			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${gender == 'F'}]]></conditionExpression>
+		</sequenceFlow>
+		<sequenceFlow id="flow5" sourceRef="PrintHiTask" targetRef="endFirstProcess"></sequenceFlow>
+		<serviceTask id="PrintUnivTask" name="Print University" activiti:class="org.mamoru.activiti.ntest.service.first.PrintUniversity"></serviceTask>
+		<sequenceFlow id="flow6" sourceRef="PrintMilitaryNumTask" targetRef="PrintUnivTask"></sequenceFlow>
+		<sequenceFlow id="flow7" sourceRef="PrintUnivTask" targetRef="endFirstProcess"></sequenceFlow>
+	</process>
+	<bpmndi:BPMNDiagram id="BPMNDiagram_firstProcess">
+		<bpmndi:BPMNPlane bpmnElement="firstProcess" id="BPMNPlane_firstProcess">
+			<bpmndi:BPMNShape bpmnElement="startFirstProcess" id="BPMNShape_startFirstProcess">
+				<omgdc:Bounds height="35.0" width="35.0" x="80.0" y="120.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="endFirstProcess" id="BPMNShape_endFirstProcess">
+				<omgdc:Bounds height="35.0" width="35.0" x="750.0" y="120.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="selectGenderTask" id="BPMNShape_selectGenderTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="170.0" y="110.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="PrintMilitaryNumTask" id="BPMNShape_PrintMilitaryNumTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="440.0" y="56.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="checkGenderGateway" id="BPMNShape_checkGenderGateway">
+				<omgdc:Bounds height="40.0" width="40.0" x="320.0" y="117.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="PrintHiTask" id="BPMNShape_PrintHiTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="440.0" y="164.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="PrintUnivTask" id="BPMNShape_PrintUnivTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="610.0" y="56.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+				<omgdi:waypoint x="115.0" y="137.0"></omgdi:waypoint>
+				<omgdi:waypoint x="170.0" y="137.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+				<omgdi:waypoint x="275.0" y="137.0"></omgdi:waypoint>
+				<omgdi:waypoint x="320.0" y="137.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flowGenderMale" id="BPMNEdge_flowGenderMale">
+				<omgdi:waypoint x="340.0" y="117.0"></omgdi:waypoint>
+				<omgdi:waypoint x="340.0" y="83.0"></omgdi:waypoint>
+				<omgdi:waypoint x="440.0" y="83.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="350.0" y="98.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flowGenderFemale" id="BPMNEdge_flowGenderFemale">
+				<omgdi:waypoint x="340.0" y="157.0"></omgdi:waypoint>
+				<omgdi:waypoint x="340.0" y="191.0"></omgdi:waypoint>
+				<omgdi:waypoint x="440.0" y="191.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="350.0" y="163.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+				<omgdi:waypoint x="545.0" y="191.0"></omgdi:waypoint>
+				<omgdi:waypoint x="767.0" y="191.0"></omgdi:waypoint>
+				<omgdi:waypoint x="767.0" y="155.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+				<omgdi:waypoint x="545.0" y="83.0"></omgdi:waypoint>
+				<omgdi:waypoint x="610.0" y="83.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+				<omgdi:waypoint x="715.0" y="83.0"></omgdi:waypoint>
+				<omgdi:waypoint x="767.0" y="83.0"></omgdi:waypoint>
+				<omgdi:waypoint x="767.0" y="120.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</definitions>

@@ -8,7 +8,8 @@
 		<property name="transactionManager" ref="activitiTransactionManager" />
 		<property name="databaseSchemaUpdate" value="true" />
 		<property name="jobExecutorActivate" value="false" />
-		<property name="deploymentResources" value="classpath*:activiti/deployment/*.bpmn20.xml" />
+		<property name="deploymentResources" value="classpath*:activiti/diagram/im/*.bpmn20.xml" />
+		<!--<property name="deploymentMode" value="single-resource" />-->
 
 		<!-- todo : Add eventlistener -->
 		<property name="eventListeners">
@@ -32,4 +33,5 @@
 		<property name="configurationResource" value="classpath*:spring/servlet/servlet-activiti-context.xml" />
 		<property name="processEngine" ref="processEngine" />
 	</bean>
+
 </beans>

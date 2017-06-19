@@ -75,7 +75,7 @@
 			<version>${org.springframework}</version>
 		</dependency>
 
-		<!-- spring-test -->
+		<!-- sproldtesttest -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -212,5 +212,15 @@
 
 	<build>
 		<finalName>maven-spring</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.passni.com">
+	<process id="addAuthProcess" name="Add Authority Process" isExecutable="true">
+		<startEvent id="startevent" name="Start"></startEvent>
+		<endEvent id="endevent" name="End"></endEvent>
+		<serviceTask id="aplctnTask" name="Application" activiti:delegateExpression="${applicationTask}"></serviceTask>
+		<serviceTask id="apprvTask" name="Approval" activiti:delegateExpression="${approvalTask}"></serviceTask>
+		<receiveTask id="apprvWaitTask" name="Approval Wait"></receiveTask>
+		<exclusiveGateway id="apprvOKGateway" name="ApprovalOK"></exclusiveGateway>
+		<serviceTask id="asgnAuthTask" name="Assign Authority" activiti:delegateExpression="${assignAuthorityTask}"></serviceTask>
+		<serviceTask id="prvsnTask" name="Provisioning" activiti:delegateExpression="${provisioningTask}"></serviceTask>
+		<sequenceFlow id="flow1" sourceRef="startevent" targetRef="aplctnTask"></sequenceFlow>
+		<sequenceFlow id="flow2" sourceRef="aplctnTask" targetRef="apprvTask"></sequenceFlow>
+		<sequenceFlow id="flow3" sourceRef="apprvTask" targetRef="apprvWaitTask"></sequenceFlow>
+		<sequenceFlow id="flow4" sourceRef="apprvWaitTask" targetRef="apprvOKGateway"></sequenceFlow>
+		<sequenceFlow id="flow5" name="YES" sourceRef="apprvOKGateway" targetRef="asgnAuthTask">
+			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${isOK == 'Y'}]]></conditionExpression>
+		</sequenceFlow>
+		<sequenceFlow id="flow6" sourceRef="asgnAuthTask" targetRef="prvsnTask"></sequenceFlow>
+		<sequenceFlow id="flow7" sourceRef="prvsnTask" targetRef="endevent"></sequenceFlow>
+		<sequenceFlow id="flow8" name="NO" sourceRef="apprvOKGateway" targetRef="endevent">
+			<conditionExpression xsi:type="tFormalExpression"><![CDATA[${isOK == 'N'}]]></conditionExpression>
+		</sequenceFlow>
+	</process>
+	<bpmndi:BPMNDiagram id="BPMNDiagram_addAuthProcess">
+		<bpmndi:BPMNPlane bpmnElement="addAuthProcess" id="BPMNPlane_addAuthProcess">
+			<bpmndi:BPMNShape bpmnElement="startevent" id="BPMNShape_startevent">
+				<omgdc:Bounds height="35.0" width="35.0" x="31.0" y="83.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="endevent" id="BPMNShape_endevent">
+				<omgdc:Bounds height="35.0" width="35.0" x="951.0" y="83.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="aplctnTask" id="BPMNShape_aplctnTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="111.0" y="73.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="apprvTask" id="BPMNShape_apprvTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="261.0" y="73.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="apprvWaitTask" id="BPMNShape_apprvWaitTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="411.0" y="73.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="apprvOKGateway" id="BPMNShape_apprvOKGateway">
+				<omgdc:Bounds height="40.0" width="40.0" x="561.0" y="80.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="asgnAuthTask" id="BPMNShape_asgnAuthTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="641.0" y="73.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="prvsnTask" id="BPMNShape_prvsnTask">
+				<omgdc:Bounds height="55.0" width="105.0" x="791.0" y="73.0"></omgdc:Bounds>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+				<omgdi:waypoint x="66.0" y="100.0"></omgdi:waypoint>
+				<omgdi:waypoint x="111.0" y="100.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+				<omgdi:waypoint x="216.0" y="100.0"></omgdi:waypoint>
+				<omgdi:waypoint x="261.0" y="100.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+				<omgdi:waypoint x="366.0" y="100.0"></omgdi:waypoint>
+				<omgdi:waypoint x="411.0" y="100.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+				<omgdi:waypoint x="516.0" y="100.0"></omgdi:waypoint>
+				<omgdi:waypoint x="561.0" y="100.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+				<omgdi:waypoint x="601.0" y="100.0"></omgdi:waypoint>
+				<omgdi:waypoint x="641.0" y="100.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="600.0" y="107.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+				<omgdi:waypoint x="746.0" y="100.0"></omgdi:waypoint>
+				<omgdi:waypoint x="791.0" y="100.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+				<omgdi:waypoint x="896.0" y="100.0"></omgdi:waypoint>
+				<omgdi:waypoint x="951.0" y="100.0"></omgdi:waypoint>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+				<omgdi:waypoint x="581.0" y="80.0"></omgdi:waypoint>
+				<omgdi:waypoint x="581.0" y="40.0"></omgdi:waypoint>
+				<omgdi:waypoint x="968.0" y="40.0"></omgdi:waypoint>
+				<omgdi:waypoint x="968.0" y="83.0"></omgdi:waypoint>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="14.0" width="100.0" x="591.0" y="61.0"></omgdc:Bounds>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</definitions>

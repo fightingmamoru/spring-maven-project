@@ -35,7 +35,7 @@ public class FinancialReportProcessTest
 
 		// Deploy process definition
 		repositoryService.createDeployment()
-				.addClasspathResource("activiti/diagram/FinancialReportProcess.bpmn20.xml")
+				.addClasspathResource("activiti/diagram/test/FinancialReportProcess.bpmn20.xml")
 				.deploy();
 
 		// start process instance
